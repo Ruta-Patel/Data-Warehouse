@@ -3,7 +3,7 @@ Data warehouse for UK Water Quality data
 
 Designed and built a Data Warehouse using Oracle DBMS for UK water quality data. The Data is taken from "Department for Environment Food & Rural Affairs" which can be accessed here:- (https://environment.data.gov.uk/water-quality/view/landing)
 
-Further ARIMA model is used for Nitrate sensor for trend predictions. 
+Further ARIMA model is used for trend predictions for Nitrate sensor. 
 
 Following is the Star Schema used for designing the data warehouse:-
 
