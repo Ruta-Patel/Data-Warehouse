@@ -1,4 +1,4 @@
-# Data-Warehouse-
+# Data-Warehouse
 Data warehouse for UK Water Quality data
 
 Designed and built a Data Warehouse using Oracle DBMS for UK water quality data. The Data is taken from "Department for Environment Food & Rural Affairs" which can be accessed here:- (https://environment.data.gov.uk/water-quality/view/landing)
