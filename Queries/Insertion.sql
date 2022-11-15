@@ -1,6 +1,6 @@
-For populating the star schema, I used cursor and select insert query.
+---For populating the star schema,cursor and select insert query is used.
 
-1) Cursor for populating Sample dimension:
+---1) Cursor for populating Sample dimension:
 
 
 declare
@@ -25,4 +25,51 @@ samplingPointnorthing");
 end loop;
 end;
 SELECT * from SAMPLE;
+
+---2) Cursor for populating fact table:
+
+declare
+CURSOR F_sample is
+SELECT "@id", ID, SAMPLE_ID,TIME_ID, 
+DETERMINAND_NOTATION,DETERMINAND_ID, 
+"samplesampledMaterialTypelabel",RESULT,"samplepurposelabel"
+from water_quality W, SAMPLE S,TIME_DIM T,DETERMINAND D
+WHERE W."@id" = S.SAMPLE_ID AND W."ID" = T.TIME_ID AND 
+W.DETERMINAND_NOTATION = D.DETERMINAND_ID;
+begin
+for F_sam in F_sample loop
+insert into 
+FACT_MEASUREMENT(SAMPLE_ID,TIME_ID,DETERMINAND_ID,SAMPLE_MATE
+RIAL_TYPE,RESULT,SAMPLE_PURPOSE)
+VALUES 
+(F_sam."@id",F_sam.TIME_ID,F_sam.DETERMINAND_NOTATION,F_sam."samplesamp
+ledMaterialTypelabel",F_sam.RESULT,F_sam."samplepurposelabel");
+end loop;
+end;
+
+---3) Cursor for populating time dimension:
+
+declare
+CURSOR T_sample is
+SELECT
+SAMPLE_DATE,SAMPLE_TIME,SAMPLE_WEEK
+from water_quality;
+begin
+for T_sam in T_sample loop
+insert into TIME_DIM(SAMPLE_DATE,SAMPLE_TIME,SAMPLE_WEEK)
+VALUES (T_sam.SAMPLE_DATE,T_sam.SAMPLE_TIME,T_sam.SAMPLE_WEEK);
+end loop;
+end;
+
+
+---4) Insert-Select query for populating determinand dimension:
+
+INSERT INTO DETERMINAND 
+(DETERMINAND_ID,DETERMINAND_LABEL,DETERMINAND_DEFINITION,DETER
+MINAND_UNIT_LABEL) 
+SELECT DISTINCT 
+DETERMINAND_NOTATION,"determinandlabel","determinanddefinition","determinandun
+itlabel" FROM WATER_QUALITY;
+
+
 
