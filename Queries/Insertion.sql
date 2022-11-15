@@ -2,7 +2,7 @@ For populating the star schema, I used cursor and select insert query.
 
 1) Cursor for populating Sample dimension:
 
-'''sql
+
 declare
 CURSOR s_sample is
 SELECT
@@ -25,4 +25,4 @@ samplingPointnorthing");
 end loop;
 end;
 SELECT * from SAMPLE;
-'''sql
+
