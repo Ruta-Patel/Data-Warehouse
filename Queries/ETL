@@ -1,1 +1,7 @@
+ETL Process:
+
+To get the data together from all the dataset of years 2000 to 2016, the data is merged into single 
+master dataset and named as water_quality. For merging the data select and union query is used.
+
+![image](https://user-images.githubusercontent.com/99355446/201920098-a1149e33-ab53-4d98-bb5f-6b587206fc92.png)
 
